@@ -1,0 +1,137 @@
+{% extends 'Customer/navbar.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>GoodRecipe Register</title>
+{% endblock title %}
+
+{% block content %}
+<div class="back">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="center">
+        <br>
+        <h1>Give Feedback</h1>
+        <br>
+        <form action="" method=POST enctype="multipart/form-data">
+            {%csrf_token %}
+            <div class="not">
+                {{FeedbackForm.userID}}
+            </div>
+            <div class="feedback-container">
+                <div><label>Rating:</label></div>
+                <div>
+                    {{FeedbackForm.rating}}
+                </div>
+                <div><label>Further Details:</label></div>
+                <div>
+                    {{FeedbackForm.details}}
+                </div>
+                <div>
+                    <label>Anonymous:</label> {{FeedbackForm.anonymous}}
+                </div>
+                <input type="Submit">
+            </div>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+
+{% block style %}
+<style>
+    .back{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .center{
+        position: absolute;
+        padding: 30px 100px 30px 100px;
+        max-width: 1000px;
+        margin: 5% 28% 5% 28%;
+        background: #DECBA4;
+        border-radius: 1rem;
+        border: 10px solid #31820f;
+        background: #DECBA4;
+        overflow: auto;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 0.5px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        border-bottom: 1px solid rgb(255, 255, 255);
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 200px;
+    }
+    
+    .center h1{
+        text-align: center;
+        color: #0c5f5f;
+        font-size: 30px;
+        font-weight: 550;
+        margin: 20px 0 20px 0;
+    }
+    .feedback-container{
+        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-row-gap: 10%;
+        margin: 0 5% 0 5%
+    }
+
+    .checkbox{
+        margin:20px 0;
+    }
+    .feedback-textarea{
+        border-radius: 1rem;
+    }
+    .not{
+        display:none
+    }
+
+    .center input[type="submit"]{
+        margin-left: 70%;
+        padding: 5px 10px 5px 10px;
+        width: 100px;
+        border: 0px solid;
+        background: #31820f;
+        border-radius: 1rem;
+        font-size: 14px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+   
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+
+    @media screen and (min-width: 2000px) {
+        .center {
+            margin: 2% 35% 2% 35%;
+        }
+    }
+</style>
+{% endblock style %}

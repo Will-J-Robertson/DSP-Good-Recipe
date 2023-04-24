@@ -1,0 +1,210 @@
+{% extends 'Customer/navbar.html' %}
+{% load static %}
+{% block title %}
+<title>GoodRecipe Register</title>
+{% endblock title %}
+
+{% block content %}
+<div class = "back">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <div class="center">
+        <h1>Account Creation </h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if user_form.errors %}
+            <div class="errors">
+                {{regular_user_form.errors}}
+                {{user_form.errors}}
+            </div>
+            <br>
+            {% endif %}
+            <div class="txt_field">
+                <label>Username / Email</label>
+                {{user_form.username}}
+            </div>
+
+            <br>
+
+            <div class="txt_field">
+                <label>First Name</label>
+                {{user_form.first_name}}
+            </div>  
+            
+            <div class="txt_field">
+                <label>Last Name</label>
+                {{user_form.last_name}}
+            </div>
+
+
+            <div class="txt_field">
+                <label>Phone Number</label>
+                {{regular_user_form.phone}}
+            </div>
+            <br>
+
+            <div class="txt_field">
+                <label>Password</label>
+                {{user_form.password1}}
+            </div>
+
+            <div class="txt_field">
+                <label>Password Confirmation</label>
+                {{user_form.password2}}
+            </div>
+            
+            <input type="submit" value="Create Account">
+            <div class="signup_link">
+                <a href="/">I have an Account!</a>
+            </div>
+        </form>
+        {{register_form.errors}}
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+{% block style %}
+<style>
+    .back{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .errorlist{
+        text-align: center;
+        position: relative;
+        height:100px;
+        background: rgb(243, 242, 242);
+        padding: 10px 10px 10px 10px;
+        border-radius: 1rem;
+        color: #b81212;
+        font-weight: 520;
+    }
+    .errors{
+        border-radius: 1rem;
+        border: 15px solid #31820f;
+        width: 100%;
+    }
+    .center{
+        position: absolute;
+        padding: 30px 100px 30px 100px;
+        max-width: 500px;
+        width: 40%;
+        margin: 2% 30% 2% 30%;
+        background: #DECBA4;
+        border-radius: 1rem;
+        border: 10px solid #31820f;
+        background: #DECBA4;
+        overflow: auto;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 0.5px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        border-bottom: 1px solid rgb(255, 255, 255);
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 200px;
+    }
+    .center h1{
+        text-align: center;
+        padding: 0 0 20px 0;
+        color: #0c5f5f;
+        border-bottom: 1px solid #0c5f5f;
+    }
+    .center form{
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+    form .txt_field{
+        position: relative;
+        border-bottom: 2px solid #3ca80e;
+        margin: 30px 0;
+    }
+
+    .txt_field input{
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        color: #ffffff;
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+    .txt_field label{
+        position: absolute;
+        top: 10%;
+        left: 5px;
+        color: #fcfcfc;
+        transform: translateY(-70%);
+        font-size: 16px;
+        transition: .5s;
+    }
+
+
+    .center input[type="submit"]{
+        width: 100%;
+        height: 50px;
+        border: 0px solid;
+        background: #31820f;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .signup_link{
+        margin: 30px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #fcfcfc;
+    }
+    .signup_link a{
+        color: #ffffff;
+    }
+    form p{
+        position: relative;
+        border-bottom: 2px solid #fcfcfc;
+        margin: 10px 0;
+    }
+    p input{
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        color: #ffffff;
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+
+    @media screen and (max-width: 2000px) {
+        .center {
+            margin: 2% 25% 2% 25%;
+        }
+    }
+</style>
+{% endblock style %}

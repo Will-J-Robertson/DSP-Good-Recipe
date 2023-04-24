@@ -1,0 +1,153 @@
+{% extends 'Customer/navbar.html' %}
+{% load static %}
+{% block title %}
+<title>GoodRecipe Login</title>
+{% endblock title %}
+
+{% block content %}
+<div class="back">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <div class="center">
+        <h1>Login</h1><hr>
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token %}
+            <div class="txt_field">
+                <input type="email" name="email"  id= "email" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" id= "password"  required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <br>
+            <br>
+            <input type="submit" value="Login">
+
+            <div class="signup_link">
+                <a href="/register">Request a sign up!</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block style %}
+<style>
+    .back{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .center{
+        position: absolute;
+        background: #DECBA4;
+        border-radius: 1rem;
+        border: 10px solid #31820f;
+        background: #DECBA4;
+        margin: 5% 35% 5% 35%;
+        overflow-y: auto;
+        width: 30%;
+        padding: 55px;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 30px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 250px;
+    }
+    .center h1{
+        padding: 0 0 20px 0;
+        color: #fff;
+        font-size: 40px;
+        font-weight: 550;
+        margin: 5px 0 0 15%;
+    }
+    .center form{
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+    form .txt_field{
+        position: relative;
+        border-bottom: 2px solid #ffffff;
+        margin: 30px 0;
+    }
+    .txt_field input{
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        color: #ffffff;
+        border: none;
+        background: none;
+        outline: none;
+    }
+    .txt_field label{
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: #ffffff;
+        transform: translateY(-50%);
+        font-size: 16px;
+        transition: .5s;
+
+    }
+    .txt_field input:focus ~ label,
+    .txt_field input:valid ~ label{
+        top: -8px;
+        color: #97ae8e;
+    }
+    .center input[type="submit"]{
+        width: 100%;
+        height: 50px;
+        border: 0px solid;
+        background: #31820f;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .signup_link{
+        margin: 30px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #ffffff;
+    }
+    .signup_link a{
+        color: #ffffff;
+    }
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+    hr{
+        height: 1px;
+        background-color: #ffffff;
+        border: none;
+    }
+    @media screen and (max-width: 1200px) {
+        .center {
+            width: 55%;
+            margin: 10% 20% -50% 20%;
+            height: 35%;
+        }
+    }
+</style>
+{% endblock style %}

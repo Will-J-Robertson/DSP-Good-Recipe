@@ -1,0 +1,262 @@
+{% extends 'Customer/navbar.html' %}
+{% load static %}
+
+{% block title %}
+<title>Recipe View Page</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class="center">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+        <label>Favourites</label>
+    </div>
+    <br>
+    <div class = 'fav-container'>
+        <div class = 'fav-recipes' style="grid-template-columns:repeat({{fav_num}}, 220px);"> 
+            {% for recipe in favourites %}
+            <div onclick="window.location.href='recipeDetails/{{recipe.id}}';" class="container">
+                <div class = "img__wrap">
+                    <div><img src="{{recipe.recipe_image.url}}" width=100% height=100%></div>
+                    <div>
+                        <div class="img__description"> <br><h2> {{ recipe.recipeName }} </h2> <hr></div>
+                        <div class="img__description"> <p> Prep Time: {{ recipe.PrepTime }} </p></div>
+                        <div class="img__description"> <p> Calories: {{ recipe.calories }} </p></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <div>
+        <label>Collabrative Filtering Recommendations</label>
+    </div>
+    <br>
+    <div class = 'recommender-container'>
+        <div class = 'recommender-recipes'> 
+            {% for recipe in collab_recommended %}
+            <div onclick="window.location.href='recipeDetails/{{recipe.id}}';" class="container">
+                <div class = "img__wrap">
+                    <div><img src="{{recipe.recipe_image.url}}" width=100% height=100%></div>
+                    <div>
+                        <div class="img__description"> <br><h2> {{ recipe.recipeName }} </h2> <hr></div>
+                        <div class="img__description"> <p> Prep Time: {{ recipe.PrepTime }} </p></div>
+                        <div class="img__description"> <p> Calories: {{ recipe.calories }} </p></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <div>
+        <label> Content-Based Filtering Recommendations</label>
+    </div>
+    <br>
+    <div class = 'recommender-container'>
+        <div class = 'recommender-recipes'> 
+            {% for recipe in content_recommended %}
+            <div onclick="window.location.href='recipeDetails/{{recipe.id}}';" class="container">
+                <div class = "img__wrap">
+                    <div><img src="{{recipe.recipe_image.url}}" width=100% height=100%></div>
+                    <div>
+                        <div class="img__description"> <br><h2> {{ recipe.recipeName }} </h2> <hr></div>
+                        <div class="img__description"> <p> Prep Time: {{ recipe.PrepTime }} </p></div>
+                        <div class="img__description"> <p> Calories: {{ recipe.calories }} </p></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <div>
+        <label>All Recipes</label>
+    </div>
+    <br>
+    <div class = 'all-container'>
+        <div class = 'all-recipes'> 
+            {% for recipe in all_recipes %}
+            <div onclick="window.location.href='recipeDetails/{{recipe.id}}';" class="container">
+                <div class = "img__wrap">
+                    <div><img src="{{recipe.recipe_image.url}}" width=100% height=100%></div>
+                    <div>
+                        <div class="img__description"> <br><h2> {{ recipe.recipeName }} </h2> <hr></div>
+                        <div class="img__description"> <p> Prep Time: {{ recipe.PrepTime }} </p></div>
+                        <div class="img__description"> <p> Calories: {{ recipe.calories }} </p></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <p style="margin-left: 10%;">@ Provided by William Robertson</p>
+    <br>
+</div>
+{% endblock content %}
+
+
+
+
+{% block style %}
+<style>
+    .center{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 0.5px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        border-bottom: 1px solid rgb(255, 255, 255);
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 200px;
+    }
+    
+    label{
+        color: #0c5f5f;
+        font-size: 30px;
+        font-weight: 550;
+        margin: 20px 15% 20px 15%;
+    }
+    .fav-container {
+        margin: 20px 15% 20px 15%;
+        background: rgb(255, 248, 172);
+        border-radius: 1rem;
+        text-align: center;
+        border: 10px solid #31820f;
+        background: #DECBA4;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    .fav-recipes {
+        display:grid;
+        margin: 2% 2% 2% 2%;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+    .recommender-container {
+        margin: 20px 15% 20px 15%;
+        background: rgb(255, 248, 172);
+        border-radius: 1rem;
+        text-align: center;
+        border: 10px solid #31820f;
+        background: #DECBA4;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    .recommender-recipes {
+        display:grid;
+        grid-template-columns:repeat(10, 220px);
+        margin: 2% 2% 2% 2%;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+
+    .all-container {
+        margin: 20px 12% 20px 12%;
+        background: rgb(255, 248, 172);
+        border-radius: 1rem;
+        text-align: center;
+        border: 10px solid #31820f;
+        background: #DECBA4;
+        overflow: auto;
+    }
+
+    .all-recipes {
+        position: relative;
+        display:grid;
+        grid-template-columns:repeat(auto-fill, 220px);
+        margin: 2% 2% 2% 2%;
+    }
+
+    .container{
+        width: 80%
+    }
+    
+    .img__wrap {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .img__description {
+        color: #fff;
+        display: none;
+        transition: visibility .2s;
+    }
+        .img__description h2{
+            font-size: 1rem;
+        }
+        .img__description p{
+            font-size: 0.8rem;
+        }
+    .img__wrap:hover{
+        background-color: #927844;
+        border-radius: 1rem;
+        width: 200px;
+        height: 185px;
+    }
+    .img__wrap:hover .img__description {
+        display: block;
+    }
+    .img__wrap:hover img {
+        display: none;
+    }
+    ::-webkit-scrollbar{
+        background-color: #DECBA4;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: #31820f;
+        border-radius: 1rem;
+    }
+
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+    .all-container::-webkit-scrollbar{
+        display: none;
+    }
+
+
+    article{
+        width: clamp(200px, 50%, 600px)
+    }
+
+</style>
+{% endblock style %}

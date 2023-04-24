@@ -1,0 +1,186 @@
+{% extends 'Customer/navbar.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>GoodRecipe Register</title>
+{% endblock title %}
+
+{% block content %}
+<div class="back">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <div class="center">
+        <h1>Reply to Feedback</h1>
+        <br>
+        <div class="feedback-container">
+            <div class="rating-container">
+                <div><h2>Rating:</h2><h2>{{feedback.rating}}</h2></div>
+            </div>
+            <div class="name-container">
+                <div>
+                    <h2>User Email:</h2>
+                    <h2>{{feedback.userID}}</h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="details-container">
+            <div>
+                <h2>{{feedback.details}}</h2>
+            </div>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <div class="reply-container">
+            <div>
+                Dear {{feedback.userID}},
+            </div>
+            <form action="" method=POST>
+                {%csrf_token %}
+                <textarea class="reply-textarea" name='details' rows="10"></textarea>
+            <div style="text-align: center;">
+                Yours Sincerly,
+                GoodRecipe
+            </div>
+        </div>
+        <input type="Submit" value="Send Reply">
+        </form>
+        <input type="Submit" value="Delete Feedback" onclick="window.location.href='/recipeAdmin/deletefeedback/{{feedback.id}}';" readonly>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+{% block style %}
+<style>
+    .back{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 0.5px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 200px;
+    }
+    .center{
+        position: absolute;
+        padding: 30px 100px 30px 100px;
+        max-width: 750px;
+        margin: 5% 15% 5% 20%;
+        background: #dbc69b;
+        border-radius: 1rem;
+        border: 10px solid #31820f;
+        overflow: auto;
+    }
+    .center h1{
+        text-align: center;
+        padding: 0 0 20px 0;
+        color: #e9f4fb;
+        border-bottom: 1px solid rgb(255, 255, 255);
+    }
+    .feedback-container{
+        font-size: 9px;
+        padding: 20px 20px 20px 20px;
+        text-align: center;
+        display: grid;
+        color: #24600b;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10%;
+        margin: 0 2% 0 2%
+    }
+    .rating-container{
+        background: #e3d3b3;
+        border-radius: 1rem;
+        border: 5px solid #31820f;
+        padding: 0 20px 0 20px;
+    }
+    .name-container{
+        background: #e3d3b3;
+        border-radius: 1rem;
+        border: 5px solid #31820f;
+        padding: 0 10px 0 10px;
+    }
+    .details-container{
+        font-size: 9px;
+        background: #e3d3b3;
+        border-radius: 1rem;
+        color: #24600b;
+        border: 5px solid #31820f;
+        padding: 20px 20px 20px 20px;
+        text-align: center;
+        margin: 0 5% 0 5%
+    }
+    .reply-container{
+        background-color: rgb(240, 240, 240);
+        border-radius: 1rem;
+        border: 5px solid #31820f;
+        padding: 20px 20px 20px 20px;
+        margin: 0 5% 5% 5%
+    }
+
+    .checkbox{
+        margin:20px 0;
+    }
+    .reply-textarea{
+        border-radius: 0.5rem;
+        margin: 20px 5% 10px 5%;
+        width: 90%;
+    }
+
+    .center input[type="submit"]{
+        float:right;
+        padding: 10px 20px 10px 20px;
+        width: 150px;
+        border: 0px solid;
+        background: #31820f;
+        border-radius: 1rem;
+        font-size: 14px;
+        color: #ffffff;
+        margin-right: 5%;
+        cursor: pointer;
+    }
+    .center input[value="Delete Feedback"]{
+        float:left;
+        margin-left: 5%;
+        background: #a32c2c;
+    }
+   
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+
+    @media screen and (min-width: 2000px) {
+        .center {
+            width: 600px;
+            margin: 2% 20% 2% 32%;
+        }
+    }
+</style>
+{% endblock style %}

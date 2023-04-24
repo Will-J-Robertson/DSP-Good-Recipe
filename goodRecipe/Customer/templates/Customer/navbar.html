@@ -1,0 +1,128 @@
+{% load static %}
+{% load usertypes%}
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+      <div class = 'navbar'>
+        <div>
+          <ul>
+            {% if request.user.is_anonymous %}
+            {% else %}
+              {% if request.user|has_group:"Admin"%}
+              <input type="submit" value="Admin Page" onclick="window.location.href='/../';" style="cursor: pointer;">
+              {% else %}
+              <input type="submit" value="Recipe Page" onclick="window.location.href='../';" style="cursor: pointer;">
+              <input type="submit" value="Give FeedBack" onclick="window.location.href='../feedback';" style="cursor: pointer;">
+              {% endif %}
+            {% endif %}
+          </ul>
+        </div>
+        <div class="dropdown" style="float:right;">
+          <button class="dropbtn">O</button>
+          <div class="dropdown-content">
+                {% if request.user.is_anonymous %}
+                  <a href="/">Login</a>
+                  <a href="/register">Register</a>
+                {% else %}
+                {% if request.user|has_group:"Customer"%}
+                  <a href="/amendDetails">Amend Account</a>
+                  {% endif %}
+                  <a href="/logout">Logout</a>
+                {% endif %}
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
+{% block content %}
+{% endblock content %}
+<div class="bottom-border">
+    <ul>
+
+    </ul>
+</div>
+{% block style %}
+{% endblock style %}
+
+<style>
+  .dropbtn {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #1a8b03;
+    color: azure;
+    border: solid 0.01px;
+    margin: -8px;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #000000;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    font-size: 14px;
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {background-color: #797474;}
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropbtn {background-color: #39cd1b;}
+  
+  ul {
+    list-style-type: none;
+    margin: -8px;
+    padding: 3px;
+    height: 34px;
+    overflow: hidden;
+    background-image: linear-gradient(to right, #229857, #31820f);
+  }
+
+  ul input{
+    padding-block: 8px;
+    background-color: #1a8b03;
+    color: azure;
+    border-radius: 2px;
+    border: solid 1px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  .navbar {
+        display:grid;
+        grid-template-columns: 200fr 1fr;
+    }
+  .bottom-border ul{
+      position: absolute;
+      bottom:0;
+      height: 5px;
+      padding: 16px;
+      width: 100vw;
+  }
+  html{
+    font-family: sans-serif;
+    background-color: #DECBA4;
+    overflow: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  
+</style>

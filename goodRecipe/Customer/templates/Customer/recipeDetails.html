@@ -1,0 +1,309 @@
+{% extends 'Customer/navbar.html' %}
+{% load static %}
+
+{% block title %}
+<title>Recipe Details Page</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class="center">
+    <div class = 'recipe-container'>
+        <br>
+        <div class = 'recipe-size-container'>
+            <div class="rec-image"><img src="{{recipe.recipe_image.url}}" width=400px height=390px>
+                <br>
+                <br>
+                Tags:
+                <br>
+                {% for tag in tags %}
+                    <input type="submit" value="{{tag}}">
+                {% endfor %}
+            </div>
+            <div class = 'recipe-details-title-container'>
+                <div style="text-align: center;"><h1>{{ recipe.recipeName }}</h1></div>
+                <br>
+                <div class = 'recipe-details-container'>
+                    <div class="left"> <label> Favourited:</label></div>
+                    <div class="right"> <label> {{ recipe.numFavourited }} </label></div>
+                    <div class="left"> <label> Prep Time:</label> </div>
+                    <div class="right"> <label> {{ recipe.PrepTime }}</label></div>
+                    <div class="left"> <label> Calories:</label> </div>
+                    <div class="right"><label>{{ recipe.calories }}</label></div>
+                </div>
+                <div class = "Star-container">
+                    <div class = "Favourites">
+                        {% if fav %}
+                        <label class="favourite">Favourite: </label>
+                        <button type="Submit" class="img-star" name="favourite-1" style="font-size:35px;color:#FFD700"; onclick="window.location.href='/recipeDetails/removeFavourite/{{recipe.id}}/{{user.id}}';">&bigstar;
+                        </button>
+                        {% else %}
+                        <form action="" method=POST enctype="multipart/form-data">
+                            {%csrf_token %}
+                            <div class = 'not'>
+                                {{FavouriteForm.userID}}
+                                {{FavouriteForm.recipeID}}
+                            </div>
+                            <label class="favourite">Favourite: </label>
+                            
+                            <button type="Submit" class="img-star" name="favourite-1" style="font-size:35px;color:#FFD700;">&star;
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <div class = "Ratings">
+                        <label class="rating">Rating:</label>
+                        <form action="" method=POST enctype="multipart/form-data">
+                            {%csrf_token %}
+                            {% if rating.rating == 5 %}
+                            <button type="Submit" class="img-stars" name="form-1" value = "1" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "2" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "3" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "4" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "5" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            {% elif rating.rating == 4 %}
+                            <button type="Submit" class="img-stars" name="form-1" value = "1" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "2" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "3" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "4" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "5" style="font-size:30px;color:#FFD700;">&star;</button>
+                            {% elif rating.rating == 3 %}
+                            <button type="Submit" class="img-stars" name="form-1" value = "1" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "2" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "3" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "4" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "5" style="font-size:30px;color:#FFD700;">&star;</button>
+                            {% elif rating.rating == 2 %}
+                            <button type="Submit" class="img-stars" name="form-1" value = "1" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "2" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "3" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "4" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "5" style="font-size:30px;color:#FFD700;">&star;</button>
+                            {% elif rating.rating == 1 %}
+                            <button type="Submit" class="img-stars" name="form-1" value = "1" style="font-size:30px;color:#FFD700;">&bigstar;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "2" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "3" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "4" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "5" style="font-size:30px;color:#FFD700;">&star;</button>
+                            {% else %}
+                        </form>
+                        <form action="" method=POST enctype="multipart/form-data">
+                            {%csrf_token %}
+                            <div class = 'not'>
+                                {{RatingForm.userID}}
+                                {{RatingForm.recipeID}}
+                                {{RatingForm.rating}}
+                            </div>
+                            <button type="Submit" class="img-stars" name="form-1" value = "1" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "2" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "3" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "4" style="font-size:30px;color:#FFD700;">&star;</button>
+                            <button type="Submit" class="img-stars" name="form-1" value = "5" style="font-size:30px;color:#FFD700;">&star;</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = 'details-container'>
+            <div><label>{{ recipe.shortDescription }}</label></div>
+        </div>
+        <br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class = 'tags-container'>
+        <div class = 'ingredients-container'>
+            <div> <h1> Ingredients:</h2></div>
+            <div><textarea rows="20" style="margin-left: 100px;" readonly>{{ recipe.ingredients }}</textarea></div>
+        </div>
+        <br>
+        <hr style="margin: 0 50px 0 50px">
+        <br>
+        <div class = 'process-container'>
+            <div> <h1> Cooking Instructions:</h2></div>
+            <div><textarea rows="25" style="margin-left: 100px;" readonly>{{ recipe.process }}</textarea></div>
+        </div>
+    </div>
+    <br>
+    <label style="margin-left: 25%;">@ Provided by William Robertson</label>
+    <br>
+    <br>
+</div>
+
+{% endblock content %}
+
+
+
+{% block style %}
+<style>
+    .center{
+        border-radius: 1rem;
+        width: 99%;
+        margin: 10px 0 0 0;
+        position: absolute;
+        background: #ffffff;
+        overflow: auto;
+        height: 94%;
+    }
+    .not{
+        display: none;
+    }
+    .recipe-container {
+        background: #f9f9f9;
+        width:100%;
+        padding: 10px 0 10px 0;
+    }
+            .recipe-size-container{
+                display:grid;
+                grid-template-columns: 1fr 1.5fr;
+                width: 40%;
+                margin: 20px 28% 20px 28%;
+            }
+            .recipe-size-container img{
+                margin: 10% 0 5% 0;
+            }
+            .recipe-details-title-container {
+                width:100%;
+                padding-top: 10%;
+                padding-left: 25%;
+                color: #000000;
+            }
+                    .recipe-details-title-container h1{
+                        font-size: 250%;
+                    }
+                    .recipe-details-title-container label{
+                        text-align: center;
+                        font-size: 100%;
+                    }
+                    
+            .recipe-details-container {
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                grid-column-gap: 25px;
+                grid-row-gap: 25px;
+            }
+                    .left{
+                        text-align: right;
+                        font-weight: bold;
+                    }
+                    .right{
+                        text-align: left;
+                    }
+
+    .Star-container{
+        width: 260px;
+        margin-left: 20%;
+        margin-top: 80px;
+    }
+        .Favourites{
+            margin-left: 25%;
+            margin-bottom: 20px;
+        }
+        .img-star{
+            background: white;
+            border-radius: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+    .Ratings{
+        margin-top:20px;
+        margin-bottom: 40px;
+    }
+        .img-stars{
+            background: white;
+            border-radius: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .rec-image input{
+                padding: 6px 30px 6px 30px;
+                background-color: #229857;
+                font-size: 15px;
+                border-radius: 100px;
+                color: azure;
+                border:none;
+                height: 40px;
+                margin: 12px 8px 0 0;
+            }
+
+        .details-container {
+            background: rgb(216, 255, 203);
+            padding: 20px 20px 20px 20px;
+            margin: 60px 5% 50px 25%;
+            max-width: 1000px;
+            border-radius: 1rem;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+    
+
+            .ingredients-container{
+                margin: 60px 5% 50px 25%;
+                background: rgb(236, 255, 231);
+                max-width: 1000px;
+                padding: 20px 20px 40px 20px;
+                border-radius: 1rem;
+            }
+            .process-container{
+                margin: 60px 5% 50px 25%;
+                background: rgb(236, 255, 231);
+                max-width: 1000px;
+                padding: 20px 20px 40px 20px;
+                border-radius: 1rem;
+            }
+            .tags-container h1{
+                color: #000000;
+                font-size: 30px;
+                margin: 0 40px 0 40px;
+                padding-top: 20px;
+            }
+
+            .tags-container textarea{
+                width: 86%;
+                margin: 2% 0 0 7%;
+                background: none;
+                border: none;
+                color: black;
+                font-size: 15px;
+                font-size: 18px;
+                font-weight: 500;
+                font-family:'Segoe UI';
+            }
+            textarea[name=cookingInstr]{
+                height: 1000px;
+            }
+        
+
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+    @media screen and (max-width: 1000px) {
+        .center {
+            width: 98%;
+        }
+        .rec-image img{
+            height: 325px;
+            width: 325px;
+        }
+        .recipe-size-container{
+                width: 60%;
+                margin: 20px 20% 20px 20%;
+            }
+
+        .recipe-details-title-container h1{
+            font-size: 150%;
+        }
+        .recipe-details-title-container label{
+            font-size: 100%;
+        }
+    }
+
+
+</style>
+{% endblock style %}

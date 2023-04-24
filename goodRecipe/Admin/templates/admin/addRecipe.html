@@ -1,0 +1,452 @@
+{% extends 'Customer/navbar.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>Add Recipe Page</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class ="back">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <div class="center">
+        <br>
+        <form action="" method=POST enctype="multipart/form-data">
+            {%csrf_token %}
+            {% if recipeForm.errors %}
+            <div class="errors">
+                {{recipeForm.errors}}
+            </div>
+            <br>
+            {% endif %}
+            <div class = "image-container">
+                <img id="recipe" src="{% static 'img/default_img.jpg' %}" width=90% height=80%>
+                <label>
+                    {% render_field recipeForm.recipe_image|attr:"type:file" id="preview"%}
+                </label>
+                <script>
+                    preview.onchange = e => {
+                        const [file] = preview.files
+                        if (file) {
+                            recipe.src = URL.createObjectURL(file)
+                        }
+                    }
+                </script>
+            </div>
+            <br>
+            <br>
+            <hr>
+            <br>
+            <div class = 'recipe-details-container'>
+                <div><h1>Recipe Name:</h1></div>
+                <div>{% render_field recipeForm.recipeName placeholder="Enter recipe Name" class+="input"%}</div>
+                <div> <h1> Prep Time:</h1> </div>
+                <div>{% render_field recipeForm.PrepTime placeholder="Enter recipe Time" class+="input"%}</div>
+                <div> <h1> Number of Calories:</h1> </div>
+                <div>{% render_field recipeForm.calories placeholder="Enter Number of calories" type="number" class+="input"%}</div>
+            </div>
+            <br>
+            <br>
+            <div class = 'description-container'>
+                <div><h1>Recipe Description:</h1></div>
+                <div>{% render_field recipeForm.shortDescription|attr:"rows=6" placeholder="Enter recipe description..." class="description-container-textarea"%}</div>
+            </div>
+            <div class = 'tag-container'>
+                <div class = 'tag-mover'>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Vegan</td>
+                            <td><label class="switch">{% render_field tagForm.vegan class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Vegetarian</td>
+                            <td><label class="switch">{% render_field tagForm.vegetarian class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Spicy</td>
+                            <td><label class="switch">{% render_field tagForm.spicy class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Halal</td>
+                            <td><label class="switch">{% render_field tagForm.halal class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Low-Calorie</td>
+                            <td><label class="switch">{% render_field tagForm.lowCalorie class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>High-Calorie</td>
+                            <td><label class="switch">{% render_field tagForm.highCalorie class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Nuts</td>
+                            <td><label class="switch">{% render_field tagForm.nuts class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Fish</td>
+                            <td><label class="switch">{% render_field tagForm.fish class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dairy</td>
+                            <td><label class="switch">{% render_field tagForm.dairy class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Lactose</td>
+                            <td><label class="switch">{% render_field tagForm.lactose class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Eggs</td>
+                            <td><label class="switch">{% render_field tagForm.egg class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Wheat</td>
+                            <td><label class="switch">{% render_field tagForm.wheat class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Slow to Cook</td>
+                            <td><label class="switch">{% render_field tagForm.slow class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Fast to Cook</td>
+                            <td><label class="switch">{% render_field tagForm.fast class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Easy to Cook</td>
+                            <td><label class="switch">{% render_field tagForm.easy class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Hard to Cook</td>
+                            <td><label class="switch">{% render_field tagForm.hard class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Soya</td>
+                            <td><label class="switch">{% render_field tagForm.soya class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Family</td>
+                            <td><label class="switch">{% render_field tagForm.family class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Partners</td>
+                            <td><label class="switch">{% render_field tagForm.partners class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                            <td>Single</td>
+                            <td><label class="switch">{% render_field tagForm.single class+="switch"%}
+                                <span class="slider round"></span></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class = 'long-containers'>
+                <div> <h1> Ingredients:</h2></div>
+                <div>{% render_field recipeForm.ingredients|attr:"rows=10" placeholder="Enter recipe Ingredients..." class="long-containers-textarea"%}</div>
+            </div>
+            <br>
+            <div class = 'long-containers'>
+                <div> <h1> Cooking Instructions:</h2></div>
+                <div>{% render_field recipeForm.process|attr:"rows=15" placeholder="Enter recipe Process..." class="long-containers-textarea"%}</div>
+            </div>
+            <br>
+            <br>
+            <br>
+        <div class="add-recipe"><input type="submit" value="Add Recipe"></div>
+        </form>
+        <div class="cancel-recipe"><input type="submit" value="Cancel Recipe" onclick="window.location.href='../';"></div>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+{% block style %}
+<style>
+    .back{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .errorlist{
+        text-align: center;
+        position: relative;
+        height:100px;
+        background: rgb(243, 242, 242);
+        padding: 10px 10px 10px 10px;
+        border-radius: 1rem;
+        color: #b81212;
+        font-weight: 520;
+    }
+    .errors{
+        border-radius: 1rem;
+        border: 15px solid #31820f;
+        width: 100%;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 0.5px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 200px;
+    }
+    .center{
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        border-radius: 1rem;
+        border: 10px solid #31820f;
+        background: #dbc69b;
+        margin: 1% 10% 1% 10%;
+        overflow: auto;
+        padding: 20px;
+    }
+    .image-container{
+        background: #cfbb92;
+        padding: 30px 40px 30px 40px;
+        margin: 2% 20% 0 20%;
+        border: 8px solid #31820f;
+        border-radius: 1rem;
+        max-width: 600px;
+    }
+            .image-container img{
+                margin: 0 100px 0 10px;
+            }
+            .image-container input{
+                margin: 20px 0 0 35%;
+                cursor: pointer;
+            }
+
+    .recipe-details-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: #cfbb92;
+        border: 8px solid #31820f;
+        padding: 30px 10px 30px 10px;
+        margin: 2% 100px 0 100px;
+        border-radius: 1rem;
+        text-align: center;
+        
+    }
+            .recipe-details-container h1{
+                font-size: 20px;
+                color:#ffffff;
+            }
+            .recipe-details-container input{
+                margin-top: 15px;
+                font-weight: 520;
+                text-align: center;
+                width: 200px;
+            }
+            input[type=number]{
+                margin-top: 15px;
+                text-align: left;
+                width: 50px;
+            }
+
+    .description-container{
+        background: #cfbb92;
+        border: 6px solid #31820f;
+        padding: 30px 10px 30px 10px;
+        margin: 2% 50px 0 50px;
+        border-radius: 1rem;
+    }
+            .description-container h1{
+                margin: 15px 15px 15px 15px;
+                color:#ffffff;
+            }
+            .description-container-textarea{
+                margin: 15px 5% 15px 15%;
+                font-weight: 520;
+                width: 70%;
+            }
+
+            .tag-container{
+                background: #cfbb92;
+                border: 6px solid #31820f;
+                border-bottom-left-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+                margin: -20px 50px 0 50px;
+            }
+ 
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 45px;
+                height: 24px;
+            }
+
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #cbcbcb;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 16px;
+                width: 16px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #31820f;
+            }
+
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(20px);
+                -ms-transform: translateX(20px);
+                transform: translateX(20px);
+            }
+
+            /* Rounded sliders */
+                .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+            table {
+                font-family: arial, sans-serif;
+                color: #ffffff;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                color:#ffffff;
+                font-weight: 600;
+                border-right: 1px solid #dddddd;
+                text-align: center;
+                padding: 8px;
+                font-size: 14px;
+            }
+
+    .long-containers{
+        background: #cfbb92;
+        border: 6px solid #31820f;
+        padding: 30px 10px 15px 10px;
+        margin: 0 50px 0 50px;
+        border-radius: 1rem;
+    }
+            .long-containers h1{
+                margin: 15px 15px 15px 15px;
+                font-size: 20px;
+                color:#ffffff;
+            }
+            .long-containers-textarea{
+                margin: 15px 5% 15px 15%;
+                width: 70%;
+                font-weight: 520;
+            }
+    
+    .add-recipe input{
+        float: right;
+        font-weight: 600;
+        padding: 6px 30px 6px 30px;
+        background-color: #31820f;
+        font-size: 13px;
+        border-radius: 100px;
+        color: azure;
+        border:none;
+        height: 40px;
+        margin-right: 10%;
+        cursor: pointer;
+    }
+    .cancel-recipe input{
+        float: left;
+        font-weight: 600;
+        padding: 6px 30px 6px 30px;
+        background-color: #c83b1f;
+        font-size: 13px;
+        border-radius: 100px;
+        color: azure;
+        border:none;
+        height: 40px;
+        margin-left: 10%;
+        cursor: pointer;
+    }
+
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+    .add-content::-webkit-scrollbar{
+        display: none;
+    }
+    @media screen and (min-width: 1200px) {
+        .center {
+            width: 40%;
+            height: 78%;
+            margin: 1% 30% 1% 30%;
+        }
+        .image-container{
+            padding: 30px 10px 30px 10px;
+            margin: 2% 20% 0 20%;
+            border-radius: 1rem;
+        }
+        .long-containers{
+            padding: 30px 10px 15px 10px;
+            margin: 0 1px 0 1px;
+        }
+        .description-container{
+            padding: 1px 1px 1px 1px;
+            margin: 2% 0 0 0;
+        }
+        .tag-container{
+            margin: -8px 0 0 0;
+        }
+        table {
+            width: 100%;
+        }
+    }
+
+</style>
+{% endblock style %}

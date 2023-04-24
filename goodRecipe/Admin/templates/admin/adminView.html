@@ -1,0 +1,230 @@
+{% extends 'Customer/navbar.html' %}
+{% load static %}
+
+{% block title %}
+<title>UWEFlix Showing Page</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class ="back">
+    <div class="Logo-Container">
+        <div class="Logo">
+            <h1><img src="{% static 'img/GoodLogo2.png' %}" width=100%></h1>
+        </div>
+    </div>
+    <div class="center">
+        <br>
+        <div class = 'control-container'>
+            <div> <h1> Admin View Controller</h2></div>
+            <div>
+                <select name="tableViewer" id="tableViewer" onclick="myFunction()">
+                    <option value="feedback">View Feedback</option>
+                    <option value="recipes">Add / Edit Recipes</option>
+                </select>
+                <input value="Create New Recipe" onclick="window.location.href='recipeAdmin/addRecipe'" readonly>
+            </div>
+            <script>
+                function myFunction() {
+                    var viewer = document.getElementById("tableViewer");
+                    var recipeTableView = document.getElementById("recipe-table");
+                    var feedbackTableView = document.getElementById("feedback-table");
+                    if (viewer.value == "recipes"){
+                        recipeTableView.style.display = "block";
+                    } else {
+                        recipeTableView.style.display = "none";
+                    }
+                    if (viewer.value == "feedback"){
+                        feedbackTableView.style.display = "block";
+                    } else {
+                        feedbackTableView.style.display = "none";
+                    }
+                }
+            </script>
+        </div>
+        <br>
+        <div class = 'table-container'>
+            <div class = 'recipe-table' id="recipe-table" style="display: none;">
+                <table>
+                    <tr>
+                        <th>Recipe ID</th>
+                        <th>Recipe Title</th>
+                        <th>Prep Time</th>
+                        <th>Calories</th>
+                        <th style="width: 25%;">Ingredients</th>
+                        <th>Amend</th>
+                    </tr>
+                    {% for recipe in all_recipes %}
+                    <tr>
+                        <td>{{recipe.id}}</td>
+                        <td>{{recipe.recipeName}}</td>
+                        <td>{{recipe.PrepTime}}</td>
+                        <td>{{recipe.calories}}</td>
+                        <td>{{recipe.ingredients}}</td>
+                        <td><input value="Edit" onclick="window.location.href='recipeAdmin/amendRecipe/{{recipe.id}}';" readonly></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class = 'feedback-table' id="feedback-table">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email/Username</th>
+                        <th>Rating</th>
+                        <th>Details</th>
+                        <th>Reply</th>
+                        <th>Delete</th>
+                </tr>
+                {% for feedback in all_feedback %}
+                    <tr>
+                        <td>{{feedback.id}}</td>
+                        {% if feedback.anonymous == 0 %}
+                            <td>{{feedback.userID}}</td>
+                        {% else %}
+                            <td>User is Anonymous</td>
+                        {% endif%}
+                        <td>{{feedback.rating}}</td>
+                        <td>{{feedback.details}}</td>
+                        {% if feedback.anonymous == 0 %}
+                            <td><input value="Reply" onclick="window.location.href='/recipeAdmin/replyfeedback/{{feedback.id}}';" readonly></td>
+                        {% else %}
+                            <td>N/A</td>
+                        {% endif%}
+                        <td><input value="Delete" onclick="window.location.href='/recipeAdmin/deletefeedback/{{feedback.id}}';" readonly></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+{% block style %}
+<style>
+    .back{
+        position: absolute;
+        width:99%;
+        height: 94%;
+        background: #f8f8f1;
+        border-radius: 1rem;
+        margin: 0.9% 0 0 0;
+        overflow: auto;
+    }
+    .Logo-Container{
+        background-color: #fff;
+        width: 100%;
+        padding-top: 0.5px;
+    }
+    .Logo{
+        text-align: center;
+        background-color: #fff;
+        margin: 2px 50% 2px 45%;
+        width:100%;
+        max-width: 260px;
+    }
+    .center{
+        position: absolute;
+        width: 60%;
+        max-width: 1100px;
+        background: #30850c;
+        border-radius: 1rem;
+        margin: 1% 25% 2% 25%;
+        overflow: auto;
+        padding: 20px;
+    }
+
+    .control-container {
+        background: #DECBA4;
+        padding: 20px 40px 50px 40px;
+        border-radius: 1rem;
+    }
+            .control-container h1{
+                color: #2b6c0f;
+                font-size: 20px;
+                margin-bottom: 30px;
+            }
+            .control-container select{
+                color: #ffffff;
+                background-color: #31820f;
+                border-width: 1px;
+                text-align: center;
+                padding: 5px 5px 5px 5px;
+                cursor: pointer;
+                margin-left: 90px;
+            }
+            .control-container input{
+                color: #ffffff;
+                background-color: #31820f;
+                border-radius: 1rem;
+                border: none;
+                text-align: center;
+                padding: 10px 10px 10px 10px;
+                float: right;
+                margin-right: 50px;
+                cursor: pointer;
+            }
+
+    .table-container {
+        background: #DECBA4;
+        padding-block: 30px;
+        height:73%;
+        border-radius: 0.5rem;
+
+    }
+            .table-container input{
+                padding: 4px 0 4px 0;
+                background-color: #31820f;
+                font-size: 13px;
+                border-radius: 1rem;
+                color: #ffffff;
+                border: none;
+                cursor: pointer;
+                text-align: center;
+                width: 55px;
+            }
+            .table-container input[value="Delete"]{
+                background: #a32c2c;
+            }
+
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 95%;
+                margin-left: 2.5%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: center;
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            tr:nth-child(even) {
+                background-color: rgb(230, 230, 230);
+            }
+            tr:nth-child(odd) {
+                background-color: rgb(240, 240, 240);
+            }
+    
+
+    .center::-webkit-scrollbar{
+        display: none;
+    }
+    .back::-webkit-scrollbar{
+        display: none;
+    }
+    @media screen and (max-width: 1200px) {
+        .center {
+            width: 90%;
+            margin: 2% 5% 2% 5%;
+        }
+    }
+
+</style>
+{% endblock style %}
